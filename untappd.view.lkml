@@ -2,12 +2,26 @@ view: untappd {
   sql_table_name: justin.untappd ;;
 
   dimension: beer_abv {
+    label: "Beer ABV"
     type: number
     sql: ${TABLE}.beer_abv ;;
   }
 
+  measure: avg_beer_abv {
+    label: "Avg Beer ABV"
+    type: average
+    sql: ${TABLE}.beer_abv ;;
+  }
+
   dimension: beer_ibu {
+    label: "Beer IBU"
     type: number
+    sql: ${TABLE}.beer_ibu ;;
+  }
+
+  measure: avg_beer_ibu {
+    label: "Avg Beer IBU"
+    type: average
     sql: ${TABLE}.beer_ibu ;;
   }
 
@@ -22,11 +36,13 @@ view: untappd {
   }
 
   dimension: beer_url {
+    label: "Beer URL"
     type: string
     sql: ${TABLE}.beer_url ;;
   }
 
   dimension: bid {
+    label: "Beer ID"
     type: number
     value_format_name: id
     sql: ${TABLE}.bid ;;
@@ -43,6 +59,7 @@ view: untappd {
   }
 
   dimension: brewery_id {
+    label: "Brewery ID"
     type: number
     sql: ${TABLE}.brewery_id ;;
   }
@@ -58,16 +75,19 @@ view: untappd {
   }
 
   dimension: brewery_url {
+    label: "Brewery URL"
     type: string
     sql: ${TABLE}.brewery_url ;;
   }
 
   dimension: checkin_id {
+    label: "Check-In ID"
     type: number
     sql: ${TABLE}.checkin_id ;;
   }
 
   dimension: checkin_url {
+    label: "Check-In URL"
     type: string
     sql: ${TABLE}.checkin_url ;;
   }
@@ -106,6 +126,12 @@ view: untappd {
     sql: ${TABLE}.rating_score ;;
   }
 
+  measure: avg_rating_score {
+    label: "Avg Rating Score"
+    type: average
+    sql: ${TABLE}.rating_score ;;
+  }
+
   dimension: serving_type {
     type: string
     sql: ${TABLE}.serving_type ;;
@@ -121,14 +147,10 @@ view: untappd {
     sql: ${TABLE}.venue_country ;;
   }
 
-  dimension: venue_lat {
-    type: number
-    sql: ${TABLE}.venue_lat ;;
-  }
-
-  dimension: venue_lng {
-    type: number
-    sql: ${TABLE}.venue_lng ;;
+  dimension: venue_location {
+    type: location
+    sql_latitude: ${TABLE}.venue_lat ;;
+    sql_longitude: ${TABLE}.venue_lng ;;
   }
 
   dimension: venue_name {
