@@ -10,4 +10,4 @@ datagroup: jmb_untappd_default_datagroup {
 
 persist_with: jmb_untappd_default_datagroup
 
-# - explore: planet_catalog
+explore: untappd {}
