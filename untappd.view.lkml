@@ -170,6 +170,7 @@ view: untappd {
 
   measure: distinct_venues {
     type: count_distinct
+    drill_fields: [venue_details*]
     sql: ${venue_location} ;;
   }
 
@@ -226,6 +227,19 @@ view: untappd {
     ]
   }
 
+  set: venue_details {
+    fields: [
+      venue_name,
+      venue_city,
+      venue_state,
+      distinct_breweries,
+      distinct_beers,
+      distinct_beer_types,
+      avg_rating_score,
+      checkin_count
+    ]
+
+  }
   set: beer_type_details {
     fields: [
       brewery_name,
