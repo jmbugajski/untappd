@@ -172,6 +172,11 @@ view: untappd {
     sql_longitude: ${TABLE}.venue_lng ;;
   }
 
+  measure: distinct_venues {
+    type: count_distinct
+    sql: ${venue_location} ;;
+  }
+
   dimension: venue_name {
     type: string
     sql: ${TABLE}.venue_name ;;
