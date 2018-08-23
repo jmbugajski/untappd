@@ -180,6 +180,7 @@ view: untappd {
 
   measure: distinct_beers {
     type: count_distinct
+    drill_fields: [beer_type_details*]
     sql: ${bid} ;;
   }
 
@@ -213,16 +214,27 @@ view: untappd {
   set: check_in_details {
     fields: [
       created_date,
-      venue_name,
-      venue_city,
-      venue_state,
       brewery_name,
       beer_name,
       beer_type,
+      venue_name,
+      venue_city,
+      venue_state,
       beer_abv,
       beer_ibu,
       rating_score
     ]
+  }
+
+  set: beer_type_details {
+    fields: [
+      brewery_name,
+      beer_name,
+      beer_abv,
+      beer_ibu,
+      avg_rating_score,
+      checkin_count
+      ]
   }
 
 }
