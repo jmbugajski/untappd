@@ -83,6 +83,7 @@ view: untappd {
   }
 
   dimension: checkin_id {
+    primary_key: yes
     label: "Check-In ID"
     type: number
     sql: ${TABLE}.checkin_id ;;
@@ -164,6 +165,16 @@ view: untappd {
   dimension: venue_state {
     type: string
     sql: ${TABLE}.venue_state ;;
+  }
+
+  dimension: find_the_source {
+    type: number
+    sql: case when ${brewery_name} = ${venue_name} then 1 else 0 end ;;
+  }
+
+  measure: total_sources_found {
+    type: sum
+    sql: ${find_the_source} ;;
   }
 
   measure: checkin_count {
