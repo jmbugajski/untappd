@@ -180,6 +180,6 @@ view: untappd {
   measure: checkin_count {
     type: count
     label: "Check-In Count"
-    drill_fields: [venue_name, brewery_name, beer_name]
+    drill_fields: [venue_name, venue_city, venue_state, brewery_name, beer_name, beer_type, beer_abv, beer_ibu]
   }
 }
