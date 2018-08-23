@@ -30,6 +30,7 @@ view: untappd {
   dimension: beer_name {
     type: string
     sql: ${TABLE}.beer_name ;;
+    drill_fields: [brewery_name,brewery_city,brewery_state,beer_type,beer_ibu,beer_abv,serving_type,rating_score]
   }
 
   dimension: beer_type {
@@ -200,6 +201,6 @@ view: untappd {
   measure: checkin_count {
     type: count
     label: "Check-In Count"
-    drill_fields: [venue_name, venue_city, venue_state, brewery_name, beer_name, beer_type, beer_abv, beer_ibu]
+    drill_fields: [venue_name, venue_city, venue_state, brewery_name, beer_name, beer_type, beer_abv, beer_ibu, rating_score]
   }
 }
