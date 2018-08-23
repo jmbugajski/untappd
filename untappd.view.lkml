@@ -1,16 +1,11 @@
 view: untappd {
   sql_table_name: justin.untappd ;;
 
+## Dimensions ##
+
   dimension: beer_abv {
     label: "Beer ABV"
     type: number
-    sql: ${TABLE}.beer_abv ;;
-  }
-
-  measure: avg_beer_abv {
-    label: "Avg Beer ABV"
-    type: average
-    value_format_name: decimal_1
     sql: ${TABLE}.beer_abv ;;
   }
 
@@ -20,27 +15,15 @@ view: untappd {
     sql: ${TABLE}.beer_ibu ;;
   }
 
-  measure: avg_beer_ibu {
-    label: "Avg Beer IBU"
-    type: average
-    value_format_name: decimal_0
-    sql: ${TABLE}.beer_ibu ;;
-  }
-
   dimension: beer_name {
     type: string
     sql: ${TABLE}.beer_name ;;
-    drill_fields: [brewery_name,brewery_city,brewery_state,beer_type,beer_ibu,beer_abv,serving_type,rating_score]
+    drill_fields: [check_in_details*]
   }
 
   dimension: beer_type {
     type: string
     sql: ${TABLE}.beer_type ;;
-  }
-
-  measure: distinct_beer_types {
-    type: count_distinct
-    sql: ${beer_type} ;;
   }
 
   dimension: beer_url {
@@ -54,11 +37,6 @@ view: untappd {
     type: number
     value_format_name: id
     sql: ${TABLE}.bid ;;
-  }
-
-  measure: distinct_beers {
-    type: count_distinct
-    sql: ${bid} ;;
   }
 
   dimension: brewery_city {
@@ -75,11 +53,6 @@ view: untappd {
     label: "Brewery ID"
     type: number
     sql: ${TABLE}.brewery_id ;;
-  }
-
-  measure: distinct_breweries {
-    type: count_distinct
-    sql: ${brewery_id} ;;
   }
 
   dimension: brewery_name {
@@ -145,13 +118,6 @@ view: untappd {
     sql: ${TABLE}.rating_score ;;
   }
 
-  measure: avg_rating_score {
-    label: "Avg Rating Score"
-    type: average
-    value_format_name: decimal_2
-    sql: ${TABLE}.rating_score ;;
-  }
-
   dimension: serving_type {
     type: string
     sql: ${TABLE}.serving_type ;;
@@ -173,11 +139,6 @@ view: untappd {
     sql_longitude: ${TABLE}.venue_lng ;;
   }
 
-  measure: distinct_venues {
-    type: count_distinct
-    sql: ${venue_location} ;;
-  }
-
   dimension: venue_name {
     type: string
     sql: ${TABLE}.venue_name ;;
@@ -193,14 +154,75 @@ view: untappd {
     sql: case when ${brewery_name} = ${venue_name} then 1 else 0 end ;;
   }
 
+## Measures ##
+
+  measure: avg_rating_score {
+    label: "Avg Rating Score"
+    type: average
+    value_format_name: decimal_2
+    sql: ${TABLE}.rating_score ;;
+  }
+
+  measure: distinct_breweries {
+    type: count_distinct
+    sql: ${brewery_id} ;;
+  }
+
+  measure: distinct_venues {
+    type: count_distinct
+    sql: ${venue_location} ;;
+  }
+
+  measure: distinct_beer_types {
+    type: count_distinct
+    sql: ${beer_type} ;;
+  }
+
+  measure: distinct_beers {
+    type: count_distinct
+    sql: ${bid} ;;
+  }
+
+  measure: avg_beer_ibu {
+    label: "Avg Beer IBU"
+    type: average
+    value_format_name: decimal_0
+    sql: ${TABLE}.beer_ibu ;;
+  }
+
   measure: total_sources_found {
     type: sum
     sql: ${find_the_source} ;;
   }
 
+  measure: avg_beer_abv {
+    label: "Avg Beer ABV"
+    type: average
+    value_format_name: decimal_1
+    sql: ${TABLE}.beer_abv ;;
+  }
+
   measure: checkin_count {
     type: count
     label: "Check-In Count"
-    drill_fields: [venue_name, venue_city, venue_state, brewery_name, beer_name, beer_type, beer_abv, beer_ibu, rating_score]
+    drill_fields: [check_in_details*]
   }
+
+## Drill Field Sets ##
+
+  set: check_in_details {
+    fields: [
+      created_date,
+      venue_name,
+      venue_city,
+      venue_state,
+      brewery_name,
+      beer_name,
+      beer_type,
+      beer_abv,
+      beer_ibu,
+      rating_score
+    ]
+  }
+
 }
