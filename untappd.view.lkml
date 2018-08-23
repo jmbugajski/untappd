@@ -235,8 +235,8 @@ view: untappd {
       distinct_breweries,
       distinct_beers,
       distinct_beer_types,
-      avg_rating_score,
-      checkin_count
+      checkin_count,
+      avg_rating_score
     ]
 
   }
@@ -246,8 +246,8 @@ view: untappd {
       beer_name,
       beer_abv,
       beer_ibu,
-      avg_rating_score,
-      checkin_count
+      checkin_count,
+      avg_rating_score
       ]
   }
 
