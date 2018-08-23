@@ -154,8 +154,8 @@ view: untappd {
   dimension: find_the_source {
     type: number
     sql:  CASE
-            WHEN untappd.venue_name LIKE CONCAT('%', untappd.brewery_name, '%')
-            THEN 1
+            WHEN untappd.venue_name LIKE CONCAT('%', untappd.brewery_name, '%') THEN 1
+            WHEN untappd.brewery_name LIKE CONCAT('%', untappd.venue_name, '%') THEN 1
             ELSE 0
           END ;;
   }
