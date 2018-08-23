@@ -131,6 +131,7 @@ view: untappd {
   measure: avg_rating_score {
     label: "Avg Rating Score"
     type: average
+    value_format_name: decimal_2
     sql: ${TABLE}.rating_score ;;
   }
 
@@ -165,8 +166,9 @@ view: untappd {
     sql: ${TABLE}.venue_state ;;
   }
 
-  measure: count {
+  measure: checkin_count {
     type: count
+    label: "Check-In Count"
     drill_fields: [venue_name, brewery_name, beer_name]
   }
 }
