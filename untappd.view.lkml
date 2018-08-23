@@ -165,7 +165,13 @@ view: untappd {
 
   measure: distinct_breweries {
     type: count_distinct
+    drill_fields: [brewery_details*]
     sql: ${brewery_id} ;;
+  }
+
+  measure: visit_count {
+    type: count_distinct
+    sql: ${created_date} ;;
   }
 
   measure: distinct_venues {
@@ -204,6 +210,12 @@ view: untappd {
     sql: ${TABLE}.beer_abv ;;
   }
 
+  measure: last_checkin_date {
+    label: "Last Check-In Date"
+    type: date
+    sql: MAX(${created_date}) ;;
+  }
+
   measure: checkin_count {
     type: count
     label: "Check-In Count"
@@ -232,14 +244,32 @@ view: untappd {
       venue_name,
       venue_city,
       venue_state,
-      distinct_breweries,
-      distinct_beers,
-      distinct_beer_types,
+      visit_count,
       checkin_count,
+      last_checkin_date,
+      distinct_beers,
+      distinct_breweries,
+      distinct_beer_types,
       avg_rating_score
     ]
-
   }
+
+  set: brewery_details {
+    fields: [
+      brewery_name,
+      venue_city,
+      venue_state,
+      visit_count,
+      checkin_count,
+      last_checkin_date,
+      distinct_beers,
+      distinct_beer_types,
+      avg_beer_abv,
+      avg_beer_ibu,
+      avg_rating_score
+    ]
+  }
+
   set: beer_type_details {
     fields: [
       brewery_name,
@@ -247,6 +277,7 @@ view: untappd {
       beer_abv,
       beer_ibu,
       checkin_count,
+      last_checkin_date,
       avg_rating_score
       ]
   }
