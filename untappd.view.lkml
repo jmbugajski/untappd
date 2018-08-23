@@ -37,6 +37,11 @@ view: untappd {
     sql: ${TABLE}.beer_type ;;
   }
 
+  measure: distinct_beer_types {
+    type: count_distinct
+    sql: ${beer_type} ;;
+  }
+
   dimension: beer_url {
     label: "Beer URL"
     type: string
@@ -48,6 +53,11 @@ view: untappd {
     type: number
     value_format_name: id
     sql: ${TABLE}.bid ;;
+  }
+
+  measure: distinct_beers {
+    type: count_distinct
+    sql: ${bid} ;;
   }
 
   dimension: brewery_city {
@@ -64,6 +74,11 @@ view: untappd {
     label: "Brewery ID"
     type: number
     sql: ${TABLE}.brewery_id ;;
+  }
+
+  measure: distinct_breweries {
+    type: count_distinct
+    sql: ${brewery_id} ;;
   }
 
   dimension: brewery_name {
