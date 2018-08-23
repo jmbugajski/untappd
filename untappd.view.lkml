@@ -10,6 +10,7 @@ view: untappd {
   measure: avg_beer_abv {
     label: "Avg Beer ABV"
     type: average
+    value_format_name: decimal_1
     sql: ${TABLE}.beer_abv ;;
   }
 
@@ -22,6 +23,7 @@ view: untappd {
   measure: avg_beer_ibu {
     label: "Avg Beer IBU"
     type: average
+    value_format_name: decimal_0
     sql: ${TABLE}.beer_ibu ;;
   }
 
