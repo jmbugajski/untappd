@@ -1,7 +1,9 @@
 view: untappd {
   sql_table_name: justin.untappd ;;
 
+################
 ## Dimensions ##
+################
 
   dimension: beer_abv {
     label: "Beer ABV"
@@ -151,10 +153,17 @@ view: untappd {
 
   dimension: find_the_source {
     type: number
-    sql: case when ${brewery_name} = ${venue_name} then 1 else 0 end ;;
+    sql:  CASE
+            WHEN untappd.venue_name LIKE CONCAT('%', untappd.brewery_name, '%')
+            THEN 1
+            ELSE 0
+          END ;;
   }
 
+
+##############
 ## Measures ##
+##############
 
   measure: avg_rating_score {
     label: "Avg Rating Score"
@@ -222,7 +231,10 @@ view: untappd {
     drill_fields: [check_in_details*]
   }
 
+
+######################
 ## Drill Field Sets ##
+#####################
 
   set: check_in_details {
     fields: [
