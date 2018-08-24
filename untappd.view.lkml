@@ -250,6 +250,7 @@ view: untappd {
 
   measure: total_sources_found {
     type: count_distinct
+    drill_fields: [brewery_details*]
     sql: ${find_the_source_key} ;;
   }
 
