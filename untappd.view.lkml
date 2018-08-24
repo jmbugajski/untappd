@@ -242,9 +242,15 @@ view: untappd {
     sql: ${TABLE}.beer_ibu ;;
   }
 
+  dimension: find_the_source_key {
+    hidden: yes
+    type: string
+    sql: CONCAT(${brewery_name},${venue_name}) ;;
+  }
+
   measure: total_sources_found {
-    type: sum
-    sql: ${find_the_source} ;;
+    type: count_distinct
+    sql: ${find_the_source_key} ;;
   }
 
   measure: avg_beer_abv {
