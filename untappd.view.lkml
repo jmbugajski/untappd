@@ -166,7 +166,6 @@ view: untappd {
               "Augustiner Bräu",
               "Augustiner-Keller",
               "Bike Dog Brewing Co.",
-              "BJ's Restaurant & Brewhouse",
               "Dogfish Head Alehouse- Gaithersburg",
               "Drake's Barrel House",
               "Drake's Dealership",
