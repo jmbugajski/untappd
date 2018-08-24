@@ -154,8 +154,44 @@ view: untappd {
   dimension: find_the_source {
     type: number
     sql:  CASE
-            WHEN untappd.venue_name LIKE CONCAT('%', untappd.brewery_name, '%') THEN 1
-            WHEN untappd.brewery_name LIKE CONCAT('%', untappd.venue_name, '%') THEN 1
+            WHEN ${venue_name} LIKE CONCAT('%', ${brewery_name}, '%') THEN 1
+            WHEN ${brewery_name} LIKE CONCAT('%', ${venue_name}, '%') THEN 1
+            WHEN ${venue_name} = "Solvang, CA" AND ${brewery_name} = "Solvang Brewing Company" THEN 1
+            WHEN ${venue_name} IN (
+              "Ballast Point Tasting Room & Kitchen Miramar",
+              "Bell's Eccentric Cafe",
+              "Caldera Brewery & Restaurant",
+              "Caldera Tap House",
+              "Cosmic Ales Brewery",
+              "Augustiner Bräu",
+              "Augustiner-Keller",
+              "Bike Dog Brewing Co.",
+              "BJ's Restaurant & Brewhouse",
+              "Dogfish Head Alehouse- Gaithersburg",
+              "Drake's Barrel House",
+              "Drake's Dealership",
+              "Elysian Brewing (Capitol Hill)",
+              "Endeavour Tap Rooms",
+              "Figueroa Mountain Brewing Company",
+              "Firestone Walker Taproom",
+              "Freewheel Brewing Co.",
+              "Gilman Brewing Company",
+              "Gordon Biersch Brewery",
+              "Los Gatos Brewing Co.",
+              "Mad River Tasting Room",
+              "Old Kan Beer & Co.",
+              "Pacific Standard Taproom",
+              "Perrin Brewing Company",
+              "Pike Brewing Company",
+              "Pizza Port Brewing Company",
+              "Pyramid Ale Taproom",
+              "Ram Restaurant & Brewery",
+              "Rogue Pearl Public House",
+              "Sacrilege Brewery + Kitchen",
+              "Sierra Nevada Torpedo Room",
+              "Triple Rock Brewery & Alehouse",
+              "Woods Bar & Brewery"
+            ) THEN 1
             ELSE 0
           END ;;
   }
