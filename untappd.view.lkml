@@ -1,5 +1,5 @@
 view: untappd {
-  sql_table_name: justin.untappd ;;
+  sql_table_name: justin.untappd2 ;;
 
 ################
 ## Dimensions ##
@@ -110,6 +110,22 @@ view: untappd {
     sql: ${TABLE}.flavor_profiles ;;
   }
 
+  dimension: global_rating_score {
+    type: number
+    sql: ${TABLE}.global_rating_score ;;
+  }
+
+  dimension: global_weighted_rating_score {
+    type: number
+    sql: ${TABLE}.global_weighted_rating_score ;;
+  }
+
+  dimension: photo_url {
+    label: "Photo URL"
+    type: string
+    sql: ${TABLE}.photo_url ;;
+  }
+
   dimension: purchase_venue {
     type: string
     sql: ${TABLE}.purchase_venue ;;
@@ -204,7 +220,31 @@ view: untappd {
     label: "Avg Rating Score"
     type: average
     value_format_name: decimal_2
-    sql: ${TABLE}.rating_score ;;
+    sql: ${rating_score} ;;
+  }
+
+  measure: avg_global_rating_score {
+    type: average
+    value_format_name: decimal_2
+    sql: ${global_rating_score} ;;
+  }
+
+  measure: avg_global_weighted_rating_score {
+    type: average
+    value_format_name: decimal_2
+    sql: ${global_weighted_rating_score} ;;
+  }
+
+  measure: max_global_rating_score {
+    type: max
+    value_format_name: decimal_2
+    sql: ${global_rating_score} ;;
+  }
+
+  measure: max_global_weighted_rating_score {
+    type: max
+    value_format_name: decimal_2
+    sql: ${global_weighted_rating_score} ;;
   }
 
   measure: distinct_breweries {
@@ -239,7 +279,7 @@ view: untappd {
     label: "Avg Beer IBU"
     type: average
     value_format_name: decimal_0
-    sql: ${TABLE}.beer_ibu ;;
+    sql: ${beer_ibu} ;;
   }
 
   dimension: find_the_source_key {
@@ -258,7 +298,7 @@ view: untappd {
     label: "Avg Beer ABV"
     type: average
     value_format_name: decimal_1
-    sql: ${TABLE}.beer_abv ;;
+    sql: ${beer_abv} ;;
   }
 
   measure: last_checkin_date {
