@@ -221,7 +221,7 @@ view: untappd {
   measure: distinct_venues {
     type: count_distinct
     drill_fields: [venue_details*]
-    sql: ${venue_location} ;;
+    sql: ${venue_location::latitude} + ${venue_location::longitude} ;;
   }
 
   measure: distinct_beer_types {
